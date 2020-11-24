@@ -20,7 +20,8 @@ main :: IO ()
 main = defaultMain tests
 
 tests :: TestTree
-tests = testGroup "Parts"
+tests = localOption (mkTimeout 1000000) $
+  testGroup "Parts"
   [ part1
   , part2
   , part3
@@ -28,21 +29,13 @@ tests = testGroup "Parts"
   ]
 
 part1 :: TestTree
-part1 = testGroup "Functions & Calls" $
-  [ testCase "1+1 = 2" $ 1+1 @?= 2 ] ++
-  tests1 ++ hidden1
+part1 = testGroup "Functions & Calls" $ tests1 ++ hidden1
 
 part2 :: TestTree
-part2 = testGroup "Types & Pattern Matching" $
-  [ testCase "2+2 = 4" $ 2+2 @?= 4 ] ++
-  tests2 ++ hidden2
+part2 = testGroup "Types & Pattern Matching" $ tests2 ++ hidden2
 
 part3 :: TestTree
-part3 = testGroup "Lists & Standard Functions" $
-  [ testCase "3+3 = 6" $ 3+3 @?= 6 ] ++
-  tests3 ++ hidden3
+part3 = testGroup "Lists & Standard Functions" $ tests3 ++ hidden3
 
 part4 :: TestTree
-part4 = testGroup "Functors, Applicatives & Monads" $
-  [ testCase "4+4 = 8" $ 4+4 @?= 8 ] ++
-  tests4 ++ hidden4
+part4 = testGroup "Functors, Applicatives & Monads" $ tests4 ++ hidden4

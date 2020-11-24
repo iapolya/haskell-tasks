@@ -20,7 +20,7 @@ extra-source-files:  CHANGELOG.md
 
 library
   exposed-modules:     Lib
-                     , Part1
+                     , Part1, Sol1
                      , Part2
                      , Part3
                      , Part4
@@ -44,3 +44,5 @@ test-suite track-two-test
                      , tasty-hedgehog >= 1.0
                      , tasty-smallcheck >= 0.8
                      , tasty-quickcheck-laws >=0
+                     , smallcheck >= 1.2
+                     , hedgehog >= 1.0
