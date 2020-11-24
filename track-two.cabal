@@ -20,7 +20,7 @@ extra-source-files:  CHANGELOG.md
 
 library
   exposed-modules:     Lib
-                     , Part1, Sol1
+                     , Part1
                      , Part2
                      , Part3
                      , Part4
