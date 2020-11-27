@@ -21,9 +21,9 @@ extra-source-files:  CHANGELOG.md
 library
   exposed-modules:     Lib
                      , Part1
-                     , Part2
+                     , Part2, Part2.Types
                      , Part3
-                     , Part4
+                     , Part4, Part4.Types
   -- other-modules:
   -- other-extensions:
   build-depends:       base >=4.13 && <4.14
@@ -43,6 +43,7 @@ test-suite track-two-test
                      , tasty-hunit >= 0.10
                      , tasty-hedgehog >= 1.0
                      , tasty-smallcheck >= 0.8
-                     , tasty-quickcheck-laws >=0
                      , smallcheck >= 1.2
                      , hedgehog >= 1.0
+                     , hedgehog-classes >= 0.2
+                     , quickcheck-classes >= 0.6
