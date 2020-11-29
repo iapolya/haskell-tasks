@@ -19,3 +19,9 @@ data Color = Color
   , green :: Int
   , blue :: Int
   } deriving (Eq,Show,Read)
+
+data Tree a = Tree
+  { left :: Maybe (Tree a)
+  , root :: a
+  , right :: Maybe (Tree a)
+  } deriving (Eq,Show,Read)
