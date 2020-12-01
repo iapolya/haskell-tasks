@@ -43,6 +43,7 @@ test-suite track-two-test
                      , tasty-hunit >= 0.10
                      , tasty-hedgehog >= 1.0
                      , tasty-smallcheck >= 0.8
+                     , tasty-quickcheck >= 0.10
                      , smallcheck >= 1.2
                      , hedgehog >= 1.0
                      , hedgehog-classes >= 0.2
