@@ -4,17 +4,18 @@ cabal-version:       3.0
 
 name:                track-two
 version:             0.1.0.0
-synopsis:            A set of problems with tests to assess students'
-                     knowledge of FP and Haskell. Contains hidden tests
-                     to avoid tampering tests
--- description:
+synopsis:            A set of problems for FP course 2020 in KFU
+description:         A set of problems with tests to assess
+                     students' knowledge of FP and Haskell.
+                     Contains hidden tests to avoid tampering
+                     tests
 -- bug-reports:
--- license:
+license:             GPL-3.0-or-later
 license-file:        LICENSE
 author:              Mansur Ziiatdinov
 maintainer:          1mziyatd@kpfu.ru
 copyright:           Mansur Ziiatdinov, 2020
--- category:
+category:            Education
 build-type:          Simple
 extra-source-files:  CHANGELOG.md
 
