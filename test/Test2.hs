@@ -67,11 +67,11 @@ test10 = testGroup "P10"
 tree1 :: Tree Int
 tree1 = Tree (Just $ Tree Nothing 1 Nothing)
              2
-             (Tree (Just $ Tree Nothing 3 Nothing)
-                   4
-                   (Just $ Tree (Just $ Tree Nothing 5 Nothing)
-                           6
-                           Nothing))
+             (Just $ Tree (Just $ Tree Nothing 3 Nothing)
+                          4
+                          (Just $ Tree (Just $ Tree Nothing 5 Nothing)
+                                  6
+                                  Nothing))
 
 -- ((1 2 3) 4 (5 6 nil))
 --      4
