@@ -89,12 +89,12 @@ tree2 = Tree (Just $ Tree (Just $ Tree Nothing 1 Nothing)
                           6
                           Nothing)
 
--- (3 1 2)
---   1
+-- (2 3 1)
+--   3
 --  / \
--- 3   2
+-- 2   1
 tree3 :: Tree Int
-tree3 = Tree (Just $ Tree Nothing 3 Nothing) 1 (Just $ Tree Nothing 2 Nothing)
+tree3 = Tree (Just $ Tree Nothing 2 Nothing) 3 (Just $ Tree Nothing 1 Nothing)
 
 tree4 :: Tree ()
 tree4 = Tree (Just $ Tree Nothing () Nothing)
@@ -138,9 +138,9 @@ test13 = testGroup "P13"
 
 test14 :: TestTree
 test14 = testGroup "P14"
-  [ testCase "prob14 (x x x) == (3 1 2)" $
+  [ testCase "prob14 (x x x) == (2 3 1)" $
     prob14 tree4 @?= tree3
-  , testCase "prob14 (nil x (x x x)) == (nil 4 (3 1 2))" $
+  , testCase "prob14 (nil x (x x x)) == (nil 4 (2 3 1))" $
     prob14 (Tree Nothing () (Just tree4)) @?= (Tree Nothing 4 (Just tree3))
   ]
 
