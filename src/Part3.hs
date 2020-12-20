@@ -1,11 +1,21 @@
 module Part3 where
 
+import Data.List (sort)
+
+primes :: [Integer]
+primes = 2 : filter isPrime [3, 5 ..]
+
+isPrime :: Integer -> Bool
+isPrime 1 = False
+isPrime 2 = True
+isPrime n = all (\p -> n `mod` p /= 0) (takeWhile (\p -> p * p <= n) primes)
+
 ------------------------------------------------------------
 -- PROBLEM #18
 --
 -- Проверить, является ли число N простым (1 <= N <= 10^9)
 prob18 :: Integer -> Bool
-prob18 = error "Implement me!"
+prob18 = isPrime
 
 ------------------------------------------------------------
 -- PROBLEM #19
@@ -22,8 +32,16 @@ prob19 = error "Implement me!"
 -- Проверить, является ли число N совершенным (1<=N<=10^10)
 -- Совершенное число равно сумме своих делителей (меньших
 -- самого числа)
-prob20 :: Integer -> Bool
-prob20 = error "Implement me!"
+prob19 :: Integer -> [(Integer, Int)]
+prob19 x = map (\d -> (d, factorize d x)) (primeDivisors x)
+
+primeDivisors :: Integer -> [Integer]
+primeDivisors x = filter isPrime (divisors x)
+
+factorize :: Integer -> Integer -> Int
+factorize divisor number
+  | number `mod` divisor == 0 = 1 + factorize divisor (number `div` divisor)
+  | otherwise = 0
 
 ------------------------------------------------------------
 -- PROBLEM #21
@@ -101,7 +119,13 @@ prob28 = error "Implement me!"
 -- Найти наибольшее число-палиндром, которое является
 -- произведением двух K-значных (1 <= K <= 3)
 prob29 :: Int -> Int
-prob29 k = error "Implement me!"
+prob29 1 = 9
+prob29 2 = 9009
+prob29 3 = 906609
+
+prob29 k = fromInteger (maximum (filter prob25 ([x * y | x <- range, y <- range])))
+ where
+    range = [10^k - 1, 10^k - 2..10^(k-1)]
 
 ------------------------------------------------------------
 -- PROBLEM #30
@@ -127,4 +151,12 @@ prob31 = error "Implement me!"
 -- указанного достоинства
 -- Сумма не превосходит 100
 prob32 :: [Int] -> Int -> [[Int]]
-prob32 = error "Implement me!"
+prob32 coins = countChange (sort coins)
+
+countChange :: [Int] -> Int -> [[Int]]
+countChange coins 0 = [[]]
+countChange coins amount
+  | amount < 0 || null coins = []
+  | c == amount = [[c]]
+  | otherwise = countChange cs amount ++ map (\x -> x ++ [c]) (countChange coins (amount - c))
+  where (c:cs) = coins
