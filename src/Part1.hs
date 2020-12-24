@@ -88,4 +88,10 @@ prob4' i a b = prob4' (i - 1) b (a + b)
 -- Числа n и k положительны и не превосходят 10^8.
 -- Число 1 не считается простым числом
 prob5 :: Integer -> Integer -> Bool
-prob5 = error "Implement me!"
+prob5 n k = all (< k) (getDivisors n 2)
+  where
+    getDivisors :: Integer -> Integer -> [Integer]
+    getDivisors divisor number
+      | divisor * divisor > number = [number]
+      | number `mod` divisor == 0 = divisor : getDivisors divisor (number `div` divisor)
+      | otherwise = getDivisors (divisor + 1) number
