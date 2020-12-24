@@ -40,8 +40,8 @@ factorize divisor number
 -- Проверить, является ли число N совершенным (1<=N<=10^10)
 -- Совершенное число равно сумме своих делителей (меньших
 -- самого числа)
-prob19 :: Integer -> [(Integer, Int)]
-prob19 = error "Implement me!"
+prob20 :: Integer -> Bool
+prob20 = error "Implement me!"
 
 ------------------------------------------------------------
 -- PROBLEM #21
@@ -49,8 +49,24 @@ prob19 = error "Implement me!"
 -- Вернуть список всех делителей числа N (1<=N<=10^10) в
 -- порядке возрастания
 prob21 :: Integer -> [Integer]
-prob21 = error "Implement me!"
+prob21 = divisors
 
+sqrt' :: Integral a => a -> a
+sqrt' x = round (sqrt (fromIntegral x))
+
+divisors :: Integer -> [Integer]
+divisors n = halfDivisors ++ allDivisors n halfDivisors []
+  where
+    halfDivisors = filter isDivisor [1..(sqrt' n)]
+    isDivisor candidate = n `mod` candidate == 0
+
+allDivisors :: Integer -> [Integer] -> [Integer] -> [Integer]
+allDivisors n [] acc = acc
+allDivisors n (x:xs) acc =
+  let a = (n `div` x)
+  in if a == x
+    then allDivisors n xs acc
+    else allDivisors n xs (a : acc)
 ------------------------------------------------------------
 -- PROBLEM #22
 --
