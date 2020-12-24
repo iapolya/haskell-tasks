@@ -73,7 +73,9 @@ allDivisors n (x:xs) acc =
 -- Подсчитать произведение количеств букв i в словах из
 -- заданной строки (списка символов)
 prob22 :: String -> Integer
-prob22 = error "Implement me!"
+prob22 str = product (map mapper (words str))
+  where
+    mapper _str = genericLength (filter (== 'i') _str)
 
 ------------------------------------------------------------
 -- PROBLEM #23
