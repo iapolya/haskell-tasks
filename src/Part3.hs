@@ -24,15 +24,6 @@ prob18 = isPrime
 -- разложении числа N (1 <= N <= 10^9). Простые делители
 -- должны быть расположены по возрастанию
 prob19 :: Integer -> [(Integer, Int)]
-prob19 = error "Implement me!"
-
-------------------------------------------------------------
--- PROBLEM #20
---
--- Проверить, является ли число N совершенным (1<=N<=10^10)
--- Совершенное число равно сумме своих делителей (меньших
--- самого числа)
-prob19 :: Integer -> [(Integer, Int)]
 prob19 x = map (\d -> (d, factorize d x)) (primeDivisors x)
 
 primeDivisors :: Integer -> [Integer]
@@ -42,6 +33,15 @@ factorize :: Integer -> Integer -> Int
 factorize divisor number
   | number `mod` divisor == 0 = 1 + factorize divisor (number `div` divisor)
   | otherwise = 0
+
+------------------------------------------------------------
+-- PROBLEM #20
+--
+-- Проверить, является ли число N совершенным (1<=N<=10^10)
+-- Совершенное число равно сумме своих делителей (меньших
+-- самого числа)
+prob19 :: Integer -> [(Integer, Int)]
+prob19 = error "Implement me!"
 
 ------------------------------------------------------------
 -- PROBLEM #21
