@@ -1,6 +1,7 @@
 module Part3 where
 
 import Data.List (sort)
+import Data.List (genericLength)
 
 primes :: [Integer]
 primes = 2 : filter isPrime [3, 5 ..]
