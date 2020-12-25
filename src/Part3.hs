@@ -11,12 +11,33 @@ isPrime 1 = False
 isPrime 2 = True
 isPrime n = all (\p -> n `mod` p /= 0) (takeWhile (\p -> p * p <= n) primes)
 
+roundedCount :: Integral a => a -> a
+roundedCount x = round (sqrt (fromIntegral x))
+
+getDivisors :: Integer -> [Integer]
+getDivisors n = halfDivisors ++ getAllDivisors n halfDivisors []
+  where
+    halfDivisors = filter isDivisor [1 .. (roundedCount n)]
+    isDivisor candidate = mod n candidate == 0
+
+getAllDivisors :: Integer -> [Integer] -> [Integer] -> [Integer]
+getAllDivisors _ [] acc = acc
+getAllDivisors n (x : xs) acc =
+  let a = div n x
+   in if a == x
+        then getAllDivisors n xs acc
+        else getAllDivisors n xs (a : acc)
+
 ------------------------------------------------------------
 -- PROBLEM #18
 --
 -- Проверить, является ли число N простым (1 <= N <= 10^9)
 prob18 :: Integer -> Bool
-prob18 = isPrime
+prob18 n
+  | n == 1 = False
+  | n == 2 = True
+  | otherwise = all (\p -> n `mod` p /= 0) (takeWhile (\p -> p * p <= n) (2 : filter prob18 [3, 5 ..]))
+
 
 ------------------------------------------------------------
 -- PROBLEM #19
@@ -133,7 +154,15 @@ prob26 = error "Implement me!"
 -- Найти в списке два числа, сумма которых равна заданному.
 -- Длина списка не превосходит 500
 prob27 :: Int -> [Int] -> Maybe (Int, Int)
-prob27 = error "Implement me!"
+prob27 _ [] = Nothing
+prob27 _sum (x:xs) = case findComplement _sum x xs of
+    Nothing -> prob27 _sum xs
+    (Just compl) -> Just (x, compl)
+  where
+    findComplement _ _ [] = Nothing
+    findComplement _sum item (_x:_xs)
+      | item + _x == _sum = Just _x
+      | otherwise = findComplement _sum item _xs
 
 ------------------------------------------------------------
 -- PROBLEM #28
@@ -164,7 +193,10 @@ prob29 k = fromInteger (maximum (filter prob25 ([x * y | x <- range, y <- range]
 -- Найти наименьшее треугольное число, у которого не меньше
 -- заданного количества делителей
 prob30 :: Int -> Integer
-prob30 = error "Implement me!"
+prob30 k = head (filter (\t -> length (getDivisors t) >= k) getTriangleNums)
+
+getTriangleNums :: [Integer]
+getTriangleNums = map (\n -> n * (n + 1) `div` 2) [0..]
 
 ------------------------------------------------------------
 -- PROBLEM #31
